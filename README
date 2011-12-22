@@ -1,0 +1,53 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3857
+
+URL: https://github.com/jaanauati/vim-wordfuzzycompletion-plugin
+
+Description
+A word fuzzy completion plugin for vim.
+
+Requirement: 
+ +python vim support.
+
+Installation:
+ Just dowload the file `wordfuzzycompletion.vim` into ~/.vim/plugins and restart vim.
+
+Use mode:
+
+ Put vim in insert mode and then you start typing, when you typed a part of a 
+word press either  Ctrl-x Ctrl-u or Ctrl-k to see the list of similar words in
+the current buffer and select one.
+
+If there are just one result, then the typed word is replaced.
+
+ Example:
+  Suppose that your buffer contains above text:
+  ------------------------
+  1 The simpsons
+  2 Futurama
+  3 Back to the Future.
+  4 Features
+  ~
+  ------------------------
+  then:
+  1) type 
+  sminsons<press Ctrl-k>
+  word must be changed to:
+  simpsons
+  2) type
+  smi<press Ctrl-k>
+  word must be changed to:
+  simpsons
+  3) type
+  furure<press Ctrl-k>
+  word must be changed to:
+  future
+  4) type
+  Furu<press Ctrl-k>
+  so, must be showed a list of similar words:
+  Fururama
+  Future
+  Features
+  
+NOTE: as it is the first version of plugin there are some bugs, so, you are 
+wellcome either to report them to me or fix them!.
+
