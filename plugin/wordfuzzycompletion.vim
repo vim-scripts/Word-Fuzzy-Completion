@@ -1,6 +1,6 @@
 " -*- coding: utf-8 -*-"
 " author: jonatan alexis anauati (barakawins@gmail.com) "
-" version: 0.3. "
+" version: 0.5. "
 
 if !has('python')
     finish
@@ -39,6 +39,7 @@ def levenshtein(a,b):
     return current[n]
 
 def completion(word):
+    file('/tmp/fuzzy.txt','w').write(word)
     results=[]
     distances = None
     distances_1 = {}
@@ -48,11 +49,12 @@ def completion(word):
     except:
         first_char=''
     word_len=len(word)
+    word_lower=word.lower()
     endwalk=False
     for line in vim.current.buffer:
         for w in line.translate(transtable).split():
             wl=w.lower()
-            if wl.startswith(word[0:len(w)]):
+            if wl.startswith(word_lower[0:len(word_lower)]):
                 results.append(w)
                 if len(results) >MAX_RESULTS:
                     endwalk=True
@@ -107,7 +109,7 @@ function! FuzzyWordCompletion(findstart, base)
     if a:findstart
         let line = getline('.')
         let start = col('.') - 1
-        while start > 0 && line[start - 1] =~ '\a'
+        while start > 0 && line[start - 1] =~ '\a\|_'
             let start -= 1
         endwhile
         return start
