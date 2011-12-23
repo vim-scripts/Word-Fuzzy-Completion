@@ -15,7 +15,8 @@ import vim
 MAX_RESULTS=vim.eval('g:fuzzywordcompletion_maxresults')
 transtable = vim.eval('g:fuzzywordcompletion_completiontable')
 if not transtable:
-    deletechars =''.join((chr(c) for c in range(0,256) if chr(c) not in string.letters))
+    nosplitchars=string.letters+'_'
+    deletechars =''.join((chr(c) for c in range(0,256) if chr(c) not in nosplitchars))
     transtable = string.maketrans(deletechars,' '*len(deletechars))
 
 def levenshtein(a,b):
