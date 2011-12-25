@@ -1,6 +1,6 @@
 " -*- coding: utf-8 -*-"
 " author: jonatan alexis anauati (barakawins@gmail.com) "
-" version: 0.5. "
+" version: 0.6. "
 
 if !has('python')
     finish
@@ -16,7 +16,8 @@ MAX_RESULTS=vim.eval('g:fuzzywordcompletion_maxresults')
 transtable = vim.eval('g:fuzzywordcompletion_completiontable')
 if not transtable:
     nosplitchars=string.letters+'_'
-    deletechars =''.join((chr(c) for c in range(0,256) if chr(c) not in nosplitchars))
+    deletechars =''.join(
+        (chr(c) for c in range(0,256) if chr(c) not in nosplitchars))
     transtable = string.maketrans(deletechars,' '*len(deletechars))
 
 def levenshtein(a,b):
@@ -39,7 +40,6 @@ def levenshtein(a,b):
     return current[n]
 
 def completion(word):
-    file('/tmp/fuzzy.txt','w').write(word)
     results=[]
     distances = None
     distances_1 = {}
@@ -68,7 +68,6 @@ def completion(word):
                 if distances!=None:
                     w_len=len(w)
                     if word_len < w_len:
-                        #w_len=word_len+int((word_len-w_len)/2)
                         w_len=word_len
                     d = levenshtein(w[0:w_len],word)
                     try:
@@ -84,7 +83,9 @@ def completion(word):
         distances=distances_1
     else:
         distances=distances_2
-    results.sort(lambda a,b: (0 if len(a)==len(b) else {True:-1,False:1}[len(a) < len(b)]))
+    results.sort(
+        lambda a,b: \
+            (0 if len(a)==len(b) else {True:-1,False:1}[len(a) < len(b)]))
     keys=list(distances.keys())
     keys.sort()
     fuzzylen=int(MAX_RESULTS)-len(results)
@@ -94,7 +95,6 @@ def completion(word):
             results.extend(distancesList)
             del distances[k]
             if len(results) >= MAX_RESULTS:
-                #TODO: implement a delete function with better performance.
                 results=results[0:MAX_RESULTS]
                 break
     return results
@@ -127,4 +127,10 @@ if !exists("g:fuzzywordcompletion_completiontable")
 endif
 
 set completefunc=FuzzyWordCompletion
-imap <C-k> <C-x><C-u>
+if !exists("g:fuzzywordcompletion_disable_crlk")
+    let g:fuzzywordcompletion_disable_crlk=0
+endif
+
+if !g:fuzzywordcompletion_disable_keybinding
+    imap <C-k> <C-x><C-u>
+endif

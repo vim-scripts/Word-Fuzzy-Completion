@@ -52,3 +52,31 @@ If there are just one result, then the typed word is replaced.
 NOTE: as it is the first version of plugin there are some bugs, so, you are 
 wellcome either to report them to me or fix them!.
 
+Customization:
+
+Certain things can be customized by the definition of some vim variables in
+your ~/.vimrc file.
+
+Variables:
+> g:fuzzywordcompletion_disable_keybinding:
+  - Default:0
+  - Details: This variable can be to used to tell the plugin that the '<Ctrl-k>' 
+    binding should not be mapped.
+    Example:
+        let g:fuzzywordcompletion_disable_keybinding=1
+
+> g:fuzzywordcompletion_maxresults: 
+  - Default: 10
+  - Details: This variable has the control over the result list lenght.
+    Yo can define this variable in the ~/.vimrc to change it.
+    Example:
+        let g:fuzzywordcompletion_maxresults=20
+
+>g:fuzzywordcompletion_completiontable: 
+  - Default: Preserves alfanumeric chars + '_'.
+  - Details: This variable contains an array of 256 bytes that represents the 
+    translation table that will be used to split words. Each position should be 
+    completed with the char that will replace the pointed position. 
+    For example, if you want that words will be splitted with the '0' char, you 
+    must put a ' ' in the position 48 of the table ('0'=48 ascii).
+  
