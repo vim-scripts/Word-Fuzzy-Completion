@@ -1,6 +1,6 @@
 " -*- coding: utf-8 -*-"
 " author: jonatan alexis anauati (barakawins@gmail.com) "
-" version: 0.6. "
+" version: 0.7. "
 
 if !has('python')
     finish
@@ -127,8 +127,8 @@ if !exists("g:fuzzywordcompletion_completiontable")
 endif
 
 set completefunc=FuzzyWordCompletion
-if !exists("g:fuzzywordcompletion_disable_crlk")
-    let g:fuzzywordcompletion_disable_crlk=0
+if !exists("g:fuzzywordcompletion_disable_keybinding")
+    let g:fuzzywordcompletion_disable_keybinding=0
 endif
 
 if !g:fuzzywordcompletion_disable_keybinding
